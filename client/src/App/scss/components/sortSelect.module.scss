@@ -1,0 +1,26 @@
+@import "../libs/normalize.scss";
+@import "../libs/variable.scss";
+
+.sortSelect{
+    text-transform: uppercase;
+    font-weight: $weight-500;
+    font-size: 14px;
+    font-family: $main-font;
+    color: white;
+    border: none;
+    text-decoration: none;
+    align-items: center;
+    padding: 0.9375rem .5rem;
+    background: $green-color;
+    border-radius: 4px;
+    display: flex;
+    gap: 0.813rem;
+    
+   
+}
+.option{
+    background: $green-background;
+    border-radius:none;
+    font-size: 14px;
+    padding: 2rem;
+}

@@ -1,0 +1,51 @@
+@import "../../../scss//libs/variable.scss";
+
+.footerWrapper{
+  
+    width: calc(100vw - 100px);
+	width: 1400px;
+    margin:0 auto;
+	max-width: 100%;
+    z-index: 10;
+    justify-items: center;
+    align-items:center;
+    gap: 2rem;
+  
+    padding: 2.125rem 7.185rem  3.185rem 7.185rem;
+    border-bottom: 2rem solid $green-color;
+    border-top: .05rem solid $main-color;
+}
+.footer{
+   
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 94%;
+    margin: 0 auto;
+    &NavBar{
+        display: flex;
+        gap: 4rem;
+        align-items: center;
+        a {
+        text-decoration: none;
+        font-weight: $weight-500;
+        letter-spacing: .1px;
+        color: $main-color;
+        }
+    }
+}
+
+.FooterSocial{
+    display: flex;
+    gap: 4rem;
+    align-self: center;
+   align-items: center;
+
+    >div{ 
+        align-items: center;
+        font-size: 1.3rem;
+        font-weight: $weight-700;
+    }
+}
+
+

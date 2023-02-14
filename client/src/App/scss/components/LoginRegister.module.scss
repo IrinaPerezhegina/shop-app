@@ -1,0 +1,136 @@
+@import "../libs/variable.scss";
+
+.container {
+    background-image: url("../../assets/login/background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    opacity: .9;
+    display: flex;
+    font-family: $main-font;
+
+}
+.form{
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    margin-left: 3rem;
+    flex:1 1 auto;
+    display: flex;
+    flex-direction: column;
+    font-family: $main-font;
+    &Content {
+        opacity: 1;
+        border-radius: 2rem;
+        padding: 2rem;
+        background-color: white;
+        padding-top:5rem;
+        padding-bottom: 10rem;
+        width: 100%;
+        max-width: 43rem;
+        align-self: center;
+        box-shadow: 0px 5px 10px 0px $green-color; 
+        h1{
+            position: relative;
+            text-align: center;
+            font-weight: $weight-700;
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 1rem;
+            &::before{
+                content: "";  
+                position: absolute;
+                background-image: url("../../../App/assets/header/textHeader.png");
+                background-repeat: no-repeat;
+                background-size: contain;
+                display: inline-block;
+                 bottom: 35%;
+                left: 70%;
+                width: 55px;
+                height:20px;
+            }
+        }
+        p{
+            text-align: center;
+            margin-bottom: .1rem;
+            font-weight: $weight-500;
+            font-size: 1rem;
+            color: $main-color;
+            display: block;
+            &:last-of-type{
+                margin-bottom: 2rem;
+                a{
+                    color: $green-color;
+                    text-decoration: none;
+                }
+            }
+        }
+        
+    }
+}
+.inputError {
+    color: red;
+}
+.formBoxInputBox{
+    margin-bottom: 3rem;
+    & > input {
+        box-sizing: border-box;
+        position: relative;
+        color: $main-color;
+        outline:none;
+        padding-bottom: 9px;
+        padding-left: 25px;
+        width: 100%;
+        border: none;
+        border-bottom: 3px solid $main-color;
+        &:focus {
+            border-bottom: 3px solid $green-color; 
+        }
+    }
+    &Icon{
+        position: absolute;
+        z-index: 1;
+        user-select: none;
+        
+    }
+    &Info{
+        display: block;
+        margin-bottom: .2rem;
+        font-weight: $weight-700;
+        color: $main-color;
+        user-select: none;
+    }
+   
+}
+
+.formBoxInputButtonBox{
+  
+ justify-self: center;
+    > input {
+    margin-top: 2rem;
+    align-items: center;
+    font-weight: $weight-500;
+    width: 100%;
+    height: 5rem;
+    border: none;
+    color: white;
+    background: $green-color;
+    border-radius: 4px;
+    text-transform: uppercase;
+    &:hover{ 
+     border: 1px solid $green-color;
+     background-color:$green-background;
+     color: $green-color;}
+}
+}
+.formBoxSocial {
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: $weight-500;
+    font-size: 1rem;
+    color: $main-color;
+    &Items{
+        margin-top: 2rem;
+    }
+}

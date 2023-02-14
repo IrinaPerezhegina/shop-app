@@ -1,0 +1,368 @@
+@import "../../../scss//libs/variable.scss";
+
+.headerWrapper{
+    width: calc(100vw - 100px);
+    background-color: $green-background;
+	width: 1400px;
+    margin:0 auto;
+	max-width: 100%;
+    z-index: 10;
+    justify-items: center;
+    align-items:center;
+    display: grid;
+    gap: 2rem;
+    padding: 4.125rem 7.185rem;
+    grid-template-areas: "a a а" "b c с " ;
+   
+
+}
+    .header{
+        grid-area: a;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: $green-background;
+        width: 94%;
+        margin: 0 auto;
+        &NavBar{
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            a {
+            z-index: 2;
+            text-decoration: none;
+            opacity: .6;
+            font-weight: $weight-500;
+            letter-spacing: .1px;
+            color: $main-color;
+           
+           }
+        }
+        &SignInUp {
+            background: $green-color;
+            display: flex;
+            gap: 0.813rem;
+        }
+        .Active {
+            opacity: 1;
+        }
+        .ButtonWrapper {
+            z-index: 2;
+            display: inline-flex;
+            gap: .5rem;
+        }
+       .cartWrapper {
+        z-index: 2;
+        text-decoration: none;
+        align-items: center;
+        padding: 0.9375rem 1.875rem;
+        background: $green-color;
+        border-radius: 4px;
+        display: flex;
+        gap: 0.813rem;
+            .cartPrice {
+                margin-bottom: 0;
+                font-weight: $weight-500;
+                color: white;
+                letter-spacing: .9px;
+                white-space: nowrap;
+              
+            }
+            .cartBorder {
+                width: 1px;
+                height: 25px;
+                background: white;
+            }
+            .cartBasket {
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                span{
+                font-weight: $weight-500;
+                color: white;
+                letter-spacing: .9px;
+                white-space: nowrap;
+                }
+            }
+       }
+       
+    }
+
+
+.textHeader {
+    margin-left: 2rem;
+    margin-top: 2rem;
+    text-align:justify;
+    height: 568px;
+    width: 428px;
+    grid-area: b;
+    h2 {
+        font-weight: $weight-700;
+        color: $green-color;
+        span {
+            font-weight: $weight-700;
+        color: $green-color;
+            text-decoration:line-through
+        }
+    }
+    h3 {
+        position: relative;
+        text-transform: uppercase;
+        font-weight: $weight-600;
+        font-size: 22px;
+        color: $green-color;
+        &::before{
+            content: "";  
+            position: absolute;
+            background-image: url("../../../assets/header/textHeader.png");
+            background-repeat: no-repeat;
+            background-size: contain;
+            display: inline-block;
+            bottom: 25%;
+            left: 82%;
+            width: 50px;
+            height:17px;
+        }
+    }
+    h1{
+        font-weight: $weight-700;
+        font-size: 61px;
+    }
+    h6{
+        font-weight: $weight-400;
+        font-size: 16px;
+        opacity: .7;
+        letter-spacing: .1px;
+        strong {
+            color: $green-color;
+        }
+    }
+}
+
+.buttomTextHeader {
+    margin-top: 3.7rem;
+    display: flex;
+    justify-content: start;
+    gap: 2rem;
+    &Shpo {
+       align-items: center;
+       font-weight: $weight-500;
+       width: 10rem;
+       height: 4rem;
+       border: none;
+       color: white;
+       background: $green-color;
+       border-radius: 4px;
+       text-transform: uppercase;
+       &:hover{ 
+        border: 1px solid $green-color;
+        background-color:$green-background;
+        color: $green-color;}
+     }
+     &Lern {
+        font-weight: $weight-500;
+        width: 10rem;
+        height: 4rem;
+        color: $green-color;
+       border: 1px solid $green-color;
+        background: $green-background;
+        border-radius: 4px;
+        text-transform: uppercase;
+        &:hover{ 
+            border: none;
+            background: $green-color;
+            color: white;
+            }
+         }
+    }
+
+
+.TextHeaderАdvantages {
+    margin-top: 2rem;
+    display: flex; 
+    justify-content: start;
+    gap: 4rem;
+    h2{
+        font-weight: $weight-700;
+        font-size: 4rem;
+        color: $green-color;
+    }
+    h4 {
+        text-align: center;
+        font-weight: $weight-500;
+        font-size: .9rem;
+        color: $main-color;
+        opacity: .7;
+    }
+ }
+
+.imgWrapper{
+    grid-area: c;
+    align-items: center;
+    z-index: 1;
+    gap: 1rem;
+  
+}
+
+.mainElement {
+   margin-top: 3rem;
+   grid-area: a;
+   position: relative;
+   background-image: url("../../../assets/header/sneackers.png");
+   background-repeat: no-repeat;
+   background-size: contain;
+   width:718px;
+   height: 500px;
+    &::before{
+        content: "";  
+        position: absolute;
+        z-index: -1;
+        background-image: url("../../../assets/header/line-01.png");
+        background-repeat: no-repeat;
+        background-size: contain;
+        bottom: -19rem;
+        left: 5rem;
+        width: 517px;
+        height: 1007px;
+    }
+    &::after{
+        content: "";  
+        position: absolute;
+        z-index: -1;
+        background-image: url("../../../assets/header/line-02.png");
+        background-repeat: no-repeat;
+        background-size: contain;
+        bottom: 12rem;
+        left: 10.2rem;
+        width: 755px;
+        height:511px;
+    }
+   
+}
+
+.auxiliaryElementOne {
+    position: relative;
+    &::before{
+        content: "";  
+        position: absolute;
+        z-index: -1;
+        background-image: url("../../../assets/header/line-03.png");
+        background-repeat: no-repeat;
+        background-size: contain;
+        top: -13rem;
+        left: 21rem;
+        width: 579px;
+        height:367px;
+    }
+    &::after{
+        content: "";  
+        position: absolute;
+        z-index: -1;
+        background-image: url("../../../assets/header/line-05.png");
+        background-repeat: no-repeat;
+        background-size: contain;
+        bottom: -13rem;
+        left: 30rem;
+        width: 755px;
+        height:487px;
+    }
+    
+}
+
+.auxiliaryElementTwo {
+    position: relative;
+    h2 {
+        position: absolute;
+        font-size: 2.5rem;
+        color:#FFFFFF;
+        font-weight: $weight-600;
+        top: 5.5rem;
+        left: 3.5rem;
+        &::before{
+            content: "";  
+            position: absolute;
+            z-index: -1;
+            background-image: url("../../../assets/header/Arrow.png");
+            background-repeat: no-repeat;
+            background-size: contain;
+            top: 9rem;
+            width:120px;
+            height:113px;
+        }
+    }
+    &::before{
+        content: "";  
+        position: absolute;
+        z-index: -1;
+        background-image: url("../../../assets/header/sole.png");
+        background-repeat: no-repeat;
+        background-size: contain;
+        top: 18rem;
+        left: 10rem;
+        width: 579px;
+        height:367px;
+    }
+    &::after{
+        content: "";  
+        position: absolute;
+        z-index: -1;
+        background-image: url("../../../assets/header/Star.png");
+        background-repeat: no-repeat;
+        background-size: contain;
+        top: 4rem;
+        left: 1rem;
+        width: 150px;
+        height:150px;
+       
+    }
+}
+
+
+
+.Carousel {
+    display: flex;
+    justify-content: end;
+    gap: 3rem;
+    
+} 
+
+.itemOne {
+   background-image: url("../../../assets/header/firstСross.png");
+   background-repeat: no-repeat;
+   background-size: contain;
+   width:6rem;
+   height: 6rem;
+   &:hover{ 
+    border-radius: 50%;
+    background: $green-color;
+    color: white;
+    opacity: .7;
+    }
+}
+
+.itemTwo {
+    background-image: url("../../../assets/header/secondСross.png");
+   background-repeat: no-repeat;
+   background-size: contain;
+   width:6rem;
+   height: 6rem;
+   &:hover{ 
+    border-radius: 50%;
+    background: $green-color;
+    color: white;
+    opacity: .7;
+    }
+}
+.itemThree {
+    background-image: url("../../../assets/header/thirdСross.png");
+   background-repeat: no-repeat;
+   background-size: contain;
+   width:6rem;
+   height: 6rem;
+   &:hover{ 
+    border-radius: 50%;
+    background: $green-color;
+    color: white;
+    opacity: .7;
+    }
+}

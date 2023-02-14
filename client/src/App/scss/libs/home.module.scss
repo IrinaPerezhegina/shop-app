@@ -1,0 +1,55 @@
+@import "./normalize.scss";
+@import "./variable.scss";
+
+.content{
+    background:linear-gradient(185deg, rgba(235,255,228,1) 15%, rgba(182,226,71,1) 16%, rgba(255,255,255,1) 36%);
+    display: flex;
+    flex-direction:column;
+    &__carts{
+        padding-top: 1.5rem;
+        display: flex;
+        justify-content: center;
+        gap: 4rem;
+        flex-wrap: wrap;
+    }
+    &__setup{
+        gap: .6rem;
+         justify-content:space-around;
+         align-items: center;
+        padding-bottom: 2rem;
+        padding-left: 5rem;
+        padding-right: 5rem;
+        background-color: $green-background;
+        display: flex;
+        justify-content:space-between;
+        &Category{
+            flex-shrink: 1;
+        }
+        &Search{
+            position: relative;
+            &Icon{
+                position: absolute;
+                left: 1.5%;
+                top: 35%;
+            }
+            flex-shrink: 1;
+            height: 100%;
+            width:80%;
+            >input{
+                font-size:14px;
+                font-weight: $weight-400;
+                height: 45px;
+                width: 100%;
+                border-radius: 4px;
+                padding-left: 1.8rem;
+                border: none;
+                
+            }
+           
+        }  
+        &Sort{
+            flex-shrink: 1;
+        }
+    }
+}
+

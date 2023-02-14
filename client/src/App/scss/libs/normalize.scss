@@ -1,0 +1,14 @@
+@import "./variable.scss";
+
+* {
+    color: $main-color;
+    text-decoration: none;
+    padding: 0; 
+    margin: 0;
+    box-sizing: border-box;
+    font-family: $main-font;
+    font-weight: $weight-700;
+    font-size: 16px;
+    
+   }
+   

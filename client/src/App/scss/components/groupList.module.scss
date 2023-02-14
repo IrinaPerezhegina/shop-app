@@ -1,0 +1,54 @@
+@import "../libs/normalize.scss";
+@import "../libs/variable.scss";
+
+.content{
+    &__setup{
+        padding-bottom: 2rem;
+        padding-left: 5rem;
+        padding-right: 5rem;
+        background-color: $green-background;
+        display: flex;
+        justify-content:space-between;
+        &Сategory {
+            display: flex;
+            gap: .1rem;
+            flex-shrink: 1;
+            &Inactive{
+                flex-shrink: 1;
+            font-weight: $weight-500;
+            font-size: 14px;
+            font-family: $main-font;
+            color: white;
+            border: none;
+            text-decoration: none;
+            align-items: center;
+            padding: 0.9375rem 1.875rem;
+            background: $green-color;
+            border-radius: 4px;
+            display: flex;
+            gap: 0.713rem;
+            text-transform: uppercase;
+            }
+            &Active{
+                flex-shrink: 1;
+            font-weight: $weight-500;
+            font-size: 14px;
+            font-family: $main-font;
+            color: white;
+            border: none;
+            text-decoration: none;
+            align-items: center;
+            padding: 0.9375rem 1.875rem;
+            background:$green-active;
+            border-radius: 4px;
+            display: flex;
+            gap: 0.713rem;
+            text-transform: uppercase;
+            
+            }
+        }
+        
+       
+    }
+}
+

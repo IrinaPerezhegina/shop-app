@@ -1,0 +1,84 @@
+@import "../../../scss//libs/variable.scss";
+.product{
+    position: relative;
+    height: 545px;
+    width: 372px;
+    align-items: center;
+    text-align: center;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    transition: transform .2s;
+    background-color: white;
+    &:hover{
+        border: 1px solid rgba(92, 190, 58, 0.3);
+        transform: scale(1.1);
+        z-index: 2;
+
+    }
+    &__img {
+    height: 352px;
+    width: 373px;
+        img{
+       
+        height: 352px;
+        width: 369px;;
+        object-fit: cover;
+    }
+        
+    }
+    &__description{
+        padding: 10px;
+      
+        &Title>a{
+            color: $main-color;
+            text-decoration: none;
+            font-style: normal;
+            font-weight: $weight-500;
+            font-size: 22px;
+            line-height: 100%;
+           text-align: center;
+           text-transform: uppercase;
+           &:hover{
+            color: $green-color;
+           }
+        }
+        &Estimation{
+            display: flex;
+            padding: 4px;
+            justify-content: center;
+            button{
+               border: none;
+               background: none;
+               &:hover{
+                background-color: black;
+               }
+            }
+        }
+        &Price{
+            font-size: 24px;
+            line-height: 130%;
+            font-weight: $weight-700;
+            color: $main-color;
+        }
+        &Btn{
+           display: flex;
+           justify-content: center;
+          
+          a{
+            margin-top: 10px;
+            padding: 10px;
+             width: 40%;
+            display: block;
+            border: 1px solid rgba(92, 190, 58, 0.3);
+            border-radius: 4px;text-decoration: none;
+            text-transform: uppercase;
+            font-size: 16px;
+            line-height: 130%;
+            font-weight: $weight-500;
+            color:$green-color;
+
+        }
+        }
+    }
+
+}

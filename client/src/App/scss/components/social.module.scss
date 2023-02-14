@@ -1,0 +1,23 @@
+@import "../../../App/scss/libs/variable.scss";
+
+.socialWrapper{
+    display: flex;
+    gap: 2rem;
+  
+.social{
+    text-align: center;
+    border-radius: 50%;
+    width: 47px;
+    height: 47px;
+    background-color: $green-color;
+    &:hover{
+        background-color: black;
+    }
+    img {
+       padding-top: 30%;
+        vertical-align: middle;
+        }
+
+    }
+    
+}
