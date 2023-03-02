@@ -18,7 +18,7 @@ router.post("/signUp", [
           .status(400)
           .json({ error: { message: "INVALID_DATA", code: 400 } });
       }
-      const { email, password } = req.body;
+      const { email, password, username } = req.body;
       const existingUser = await User.findOne({ email: email });
       if (existingUser) {
         return res.status(400).json({
@@ -29,11 +29,13 @@ router.post("/signUp", [
           },
         });
       }
+
       const hashedPassword = await bcrypt.hash(password, 12);
       const newUser = await User.create({
         ...req.body,
         password: hashedPassword,
       });
+      await console.log(newUser);
       const tokens = tokenService.generate({ _id: newUser._id });
       await tokenService.save(newUser._id, tokens.refreshToken);
 

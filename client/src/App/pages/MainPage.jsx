@@ -56,9 +56,8 @@ const MainPage = () => {
     ];
     useEffect(() => {
         dispatch(loadProductsList());
-
-        setSortProducts(products);
-    }, []);
+        // setSortProducts(products);
+    }, [dispatch]);
 
     useEffect(() => {
         setCurrentPage(1);
@@ -83,6 +82,9 @@ const MainPage = () => {
     const handlePageChange = (pageIndex) => {
         setCurrentPage(pageIndex);
     };
+    const addedToCart = (id) => {
+        console.log(id);
+    };
 
     function filterProducts(data) {
         const filteredProducts = searchQuery
@@ -103,10 +105,6 @@ const MainPage = () => {
 
     const filteredProducts = filterProducts(products);
     const count = filteredProducts?.length;
-    // const sortedProducts =
-    //     sortSign === "priceASC"
-    //         ? _.orderBy(filteredProducts, ["rating"], ["ASC"])
-    //         : "";
 
     useEffect(() => {
         const findOption = sortOptions.find(({ value }) => value === sortSign);
@@ -120,7 +118,7 @@ const MainPage = () => {
         setSortProducts(products);
     }, [products]);
     const usersCrop = paginate(sortProducts, currentPage, pageSize);
-    console.log(products);
+
     return (
         <>
             <Header />
@@ -158,7 +156,10 @@ const MainPage = () => {
                     <div className={styles.content__carts}>
                         {usersCrop?.map((product) => (
                             <ProductCard
-                                key={product.id}
+                                id={product._id}
+                                onClick={addedToCart}
+                                key={product._id}
+                                rating={product.rating}
                                 title={product.title}
                                 price={product.price}
                                 image={product.image}

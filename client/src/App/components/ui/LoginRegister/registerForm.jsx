@@ -1,8 +1,63 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "../../../scss/components/LoginRegister.module.scss";
+import * as yup from "yup";
+import { getAuthErrors, signUp } from "../../../store/user";
+
+const validateSchema = yup.object().shape({
+    confirm_password: yup
+        .string()
+        .required(`Поле 'Password' обязательно для заполнения`)
+        .oneOf([yup.ref("password"), null], "Passwords must match"),
+    password: yup
+        .string()
+        .required(`Поле 'Password' обязательно для заполнения`)
+        .min(8),
+    username: yup
+        .string()
+        .required(`Поле 'Username' обязательно для заполнения`),
+    email: yup
+        .string()
+        .required(`Поле 'Email' обязательно для заполнения`)
+        .email()
+});
 
 const RegisterForm = () => {
+    const dispatch = useDispatch();
+    const [data, setData] = useState({
+        email: "",
+        username: "",
+        password: "",
+        confirm_password: ""
+    });
+    const registerError = useSelector(getAuthErrors());
+    const [errors, setErrors] = useState({});
+    useEffect(() => {
+        validate();
+    }, [data]);
+    const validate = () => {
+        validateSchema
+            .validate(data)
+            .then(() => setErrors({}))
+            .catch((err) => setErrors({ [err.path]: err.message }));
+
+        return Object.keys(errors).length === 0;
+    };
+    const isValid = Object.keys(errors).length === 0;
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const isValid = validate();
+        if (!isValid) return e;
+        dispatch(signUp(data));
+    };
+    const handleChange = ({ target }) => {
+        setData((prevState) => ({
+            ...prevState,
+            [target.name]: target.value
+        }));
+    };
     return (
         <div className={styles.container}>
             <section className={styles.form}>
@@ -12,7 +67,7 @@ const RegisterForm = () => {
                     <p>
                         You can <Link to="/login">Login here!</Link>
                     </p>
-                    <form className={styles.formBox} action="">
+                    <form className={styles.formBox} onSubmit={handleSubmit}>
                         <div className={styles.formBoxInputBox}>
                             <label
                                 className={styles.formBoxInputBoxInfo}
@@ -36,11 +91,22 @@ const RegisterForm = () => {
                                 </svg>
                             </label>
                             <input
+                                onChange={handleChange}
+                                value={data.email}
                                 type="email"
                                 name="email"
                                 id="email"
                                 placeholder="Enter your address"
                             />
+                            <div
+                                className={
+                                    errors.email
+                                        ? styles.inputError
+                                        : "invalid-feedback"
+                                }
+                            >
+                                {errors.email}
+                            </div>
                         </div>
                         <div className={styles.formBoxInputBox}>
                             <label
@@ -65,11 +131,22 @@ const RegisterForm = () => {
                                 </svg>
                             </label>
                             <input
+                                onChange={handleChange}
+                                value={data.username}
                                 type="text"
                                 name="username"
                                 id="username"
                                 placeholder="Enter your User name"
                             />
+                            <div
+                                className={
+                                    errors.username
+                                        ? styles.inputError
+                                        : "invalid-feedback"
+                                }
+                            >
+                                {errors.username}
+                            </div>
                         </div>
                         <div className={styles.formBoxInputBox}>
                             <label
@@ -95,11 +172,22 @@ const RegisterForm = () => {
                                 </svg>
                             </label>
                             <input
+                                onChange={handleChange}
+                                value={data.password}
                                 type="password"
                                 name="password"
                                 id="password"
                                 placeholder="Enter your Password"
                             />
+                            <div
+                                className={
+                                    errors.password
+                                        ? styles.inputError
+                                        : "invalid-feedback"
+                                }
+                            >
+                                {errors.password}
+                            </div>
                         </div>
                         <div className={styles.formBoxInputBox}>
                             <label
@@ -125,14 +213,38 @@ const RegisterForm = () => {
                                 </svg>
                             </label>
                             <input
+                                onChange={handleChange}
+                                value={data.confirm_password}
                                 type="password"
-                                name="password"
-                                id="confirm-password"
+                                name="confirm_password"
+                                id="confirm_password"
                                 placeholder="Confirm your Password"
                             />
+                            <div
+                                className={
+                                    errors.confirm_password
+                                        ? styles.inputError
+                                        : "invalid-feedback"
+                                }
+                            >
+                                {errors.confirm_password}
+                            </div>
                         </div>
-                        <div className={styles.formBoxInputButtonBox}>
-                            <input type="submit" value="Register" />
+                        {registerError && (
+                            <p className="text-danger">{registerError}</p>
+                        )}
+                        <div
+                            className={
+                                !isValid
+                                    ? styles.formBoxInputButtonBoxDisabled
+                                    : styles.formBoxInputButtonBox
+                            }
+                        >
+                            <input
+                                disabled={!isValid}
+                                type="submit"
+                                value="Register"
+                            />
                         </div>
                     </form>
                 </div>

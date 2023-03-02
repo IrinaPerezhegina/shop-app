@@ -63,8 +63,7 @@
         &Btn{
            display: flex;
            justify-content: center;
-          
-          a{
+            button{
             margin-top: 10px;
             padding: 10px;
              width: 40%;
@@ -76,8 +75,25 @@
             line-height: 130%;
             font-weight: $weight-500;
             color:$green-color;
-
-        }
+            background-color:$green-background;
+            }
+            &Disabled{
+            display: flex;
+            justify-content: center;
+            >button{
+            margin-top: 10px;
+            padding: 10px;
+             width: 40%;
+            display: block;
+            border: 1px solid rgba(92, 190, 58, 0.3);
+            border-radius: 4px;text-decoration: none;
+            text-transform: uppercase;
+            font-size: 16px;
+            line-height: 130%;
+            font-weight: $weight-500;
+            color:$green-color;
+            background-color:$green-color;
+        }}
         }
     }
 

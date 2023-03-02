@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import styles from "../../../scss/components/LoginRegister.module.scss";
 import Social from "../social";
 import * as yup from "yup";
+import { useDispatch, useSelector } from "react-redux";
+import { getAuthErrors, login } from "../../../store/user";
 
 const validateSchema = yup.object().shape({
     password: yup
@@ -18,10 +20,11 @@ const validateSchema = yup.object().shape({
 const LoginForm = () => {
     const [data, setData] = useState({
         email: "",
-        password: "",
-        stayOn: false
+        password: ""
     });
     const [errors, setErrors] = useState({});
+    const loginError = useSelector(getAuthErrors());
+    const dispatch = useDispatch();
 
     useEffect(() => {
         validate();
@@ -35,15 +38,14 @@ const LoginForm = () => {
         return Object.keys(errors).length === 0;
     };
     const isValid = Object.keys(errors).length === 0;
-    console.log(errors);
+
     const handleSubmit = (e) => {
-        console.log(e);
         e.preventDefault();
         const isValid = validate();
         if (!isValid) return e;
+        dispatch(login(data));
     };
     const handleChange = ({ target }) => {
-        console.log(target.value);
         setData((prevState) => ({
             ...prevState,
             [target.name]: target.value
@@ -83,6 +85,7 @@ const LoginForm = () => {
                             </label>
                             <input
                                 onChange={handleChange}
+                                value={data.email}
                                 type="email"
                                 name="email"
                                 id="email"
@@ -123,6 +126,7 @@ const LoginForm = () => {
                             </label>
                             <input
                                 onChange={handleChange}
+                                value={data.password}
                                 type="password"
                                 name="password"
                                 id="password"
@@ -138,7 +142,17 @@ const LoginForm = () => {
                                 {errors.password}
                             </div>
                         </div>
-                        <div className={styles.formBoxInputButtonBox}>
+                        {loginError && (
+                            <p className="text-danger">{loginError}</p>
+                        )}
+
+                        <div
+                            className={
+                                !isValid
+                                    ? styles.formBoxInputButtonBoxDisabled
+                                    : styles.formBoxInputButtonBox
+                            }
+                        >
                             <input
                                 disabled={!isValid}
                                 type="submit"

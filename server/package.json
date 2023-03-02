@@ -19,7 +19,8 @@
     "express": "^4.18.2",
     "express-validator": "^6.14.3",
     "jsonwebtoken": "^9.0.0",
-    "mongoose": "^6.9.0"
+    "mongoose": "^6.9.0",
+    "react-rater": "^6.0.5"
   },
   "devDependencies": {
     "cross-env": "^7.0.3",

@@ -16,7 +16,13 @@
    
 
 }
-    .header{
+.spinnerWrapper{
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    width:10rem;
+}
+.header{
         grid-area: a;
         display: flex;
         justify-content: space-between;

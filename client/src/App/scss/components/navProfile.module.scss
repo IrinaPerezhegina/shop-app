@@ -1,0 +1,33 @@
+@import "../libs/normalize.scss";
+@import "../libs/variable.scss";
+
+.profileWrapper{
+    display: flex;
+    gap: 0.813rem;
+   align-items: center;
+   &_username{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: nowrap;
+    font-weight: $weight-500;
+    font-size: 1.2rem;
+    white-space: nowrap;
+    padding: 0.9375rem 1.875rem;
+    background-color: $green-color;
+    border-radius: 4px;
+    letter-spacing: .9px;
+    color: white;
+   }
+   &_Border{
+    width: 1px;
+      height: 25px;
+    background: white;
+   
+   }
+   &_btnLogOut{
+    background-color: $green-color;
+    border: none;
+   }
+
+}

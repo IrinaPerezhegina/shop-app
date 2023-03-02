@@ -1,9 +1,10 @@
-const Products = require("../models/Products");
+const Products = require("../models/Products.js");
 const productsMock = require("../mock/products.json");
 const { Model } = require("mongoose");
 
 module.exports = async () => {
   const products = await Products.find();
+
   if (products.length !== productsMock.length) {
     await createInitialEntity(Products, productsMock);
   }

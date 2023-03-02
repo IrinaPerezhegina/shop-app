@@ -1,0 +1,255 @@
+@import "../libs/normalize.scss";
+@import "../libs/variable.scss";
+
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+h2{
+    font-size: 1.5rem;
+}
+.product {
+//    background:rgb(244, 242, 242);
+    line-height: 1.5;
+    &Wrapper{
+        max-width:  100%;
+        margin: 0 auto;
+        display: flex;
+       justify-content: space-between;
+        align-items: center;
+    }
+    &Imgs{
+        
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    &_content{
+        background:rgb(239, 244, 228);
+        padding: 2rem 1rem;
+        padding-top: 0;
+
+    }
+    &_colorWrapper{
+       display: flex;
+       flex-wrap: wrap;
+        >div>input{
+            display: none;
+        }
+        >div>label{
+            margin-top: .9rem;
+            display: inline-block;
+            border-radius: 50%;
+            margin-left: 1rem;
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+        }
+        &Checked{
+            border: 5px solid $green-color;
+        }
+    }
+    
+    &_sizeWrapper{
+        display: flex;
+       flex-wrap: wrap;
+        >div>input{
+            display: none;
+        }
+        >div>label{
+           
+            margin-top: .9rem;
+            align-items: center;
+            justify-content: center;
+            margin-left: .5rem;
+            display: inline-flex;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            // border: 1px solid $green-color;
+            background-color: rgb(189, 246, 189);
+            }
+        &Checked{
+            border: 5px solid $green-color;
+            transform:scale(1.2);
+            opacity: 1;
+        }
+        >div>label>span{
+          font-size: 1.3rem;
+          color: $main-color;
+         }
+        }
+
+    
+    &_title{
+        font-size: 2rem;
+        text-transform: capitalize;
+        font-weight: $weight-700;
+        position: relative;
+        color: $green-color;
+        margin: 1rem 0;
+        &::after{
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 4px;
+            width: 80px;
+            background:$green-background
+        }
+    }
+    &_art>span{
+        text-decoration: none;
+        text-transform: uppercase;
+        font-weight: $weight-400;
+        font-size: .9rem;
+        display: inline-block;
+        margin-bottom: .5rem;
+        background: $green-color;
+        color: white;
+        padding:  0 0.3rem;
+        transform: all .5s ease;
+        &:hover{
+            opacity: .9;
+        }
+    }
+    &_rating>i{
+        color: yellow;
+        >span{
+            font-weight: $weight-600;
+            color: $main-color;
+        }
+    }
+    &_price{
+        margin: 1rem 0;
+        >p{
+            font-size: 1.5rem;
+            font-weight: $weight-700;
+        }
+    }
+    &_detail{
+        text-transform: capitalize;
+        color: $main-color;
+        padding-bottom: .6rem;
+        >p{
+            font-size: .9rem;
+            padding: .3rem ;
+            opacity: .8;
+        }
+        >ul{
+            margin: .2rem 0;
+            font-size: .9rem;
+           
+            >li{
+                margin: 0 ;
+                list-style: none;
+                background-size: 10px;
+                margin: .4rem ;
+                font-weight: $weight-600;
+                opacity:.9 ;
+                >span{
+                    font-weight: $weight-400;
+                }
+            }
+        }
+    }
+    &_btn{
+     >button{
+        cursor: pointer;
+        color: $main-color;
+        margin-top: 2rem;
+        align-items: center;
+        font-weight: $weight-500;
+        width: 100%;
+        height: 5rem;
+        border: none;
+        color: white;
+        background: $green-color;
+        border-radius: 4px;
+        text-transform: uppercase;
+        &:hover{ 
+        border: 1px solid $green-color;
+        background-color:$green-background;
+        color: $green-color;
+        }
+    }
+        
+    
+    }
+}
+
+.link{
+    padding-top:4px;
+    text-decoration: none;
+    position: relative;
+    display: block;
+    cursor: pointer;
+    color: $main-color;
+    align-items: center;
+    text-align: center;
+    font-weight: $weight-500;
+    width: 100%;
+    height: 2rem;
+    border: none;
+    color: white;
+    background: $green-color;
+    text-transform: uppercase;
+    &:hover{ 
+        border: 1px solid $green-color;
+        background-color:$green-background;
+        color: $green-color;
+    
+}
+}
+
+
+.linkIcon{
+    position: absolute;
+    left: 1%;
+    top: 20%;
+    &:hover{ 
+        fill: $main-color;
+    }
+}
+
+
+
+img{
+    width: 100% ;
+    display: block;
+}
+.img{
+    &_display{
+    overflow: hidden;
+    }
+    &_showcase{
+        display: flex;
+        width: 100%;
+        transition: all 0.5s ease;
+        >img{
+            min-width: 100%;
+        }
+    }
+    &_select{
+        display: flex;
+    }
+    &_item{
+        margin: 0.3rem;
+        &:nth-child(1),:nth-child(2),:nth-child(3){
+            margin-right: 0;
+        }
+        &:hover{
+          opacity: .8;  
+        }
+    }
+}
+
+.card{
+    background:rgb(244, 242, 242);
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-gap:1.5rem;
+}
