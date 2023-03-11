@@ -1,7 +1,17 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-const TextField = ({ label, type, name, value, onChange, error }) => {
+const TextField = ({
+    step,
+    min,
+    max,
+    label,
+    type,
+    name,
+    value,
+    onChange,
+    error
+}) => {
     const [showPassword, setShowPassword] = useState(false);
 
     const handleChange = ({ target }) => {
@@ -18,6 +28,9 @@ const TextField = ({ label, type, name, value, onChange, error }) => {
             <label htmlFor={name}>{label}</label>
             <div className="input-group has-validation">
                 <input
+                    step={step}
+                    min={min}
+                    max={max}
                     type={showPassword ? "text" : type}
                     id={name}
                     name={name}
@@ -25,6 +38,7 @@ const TextField = ({ label, type, name, value, onChange, error }) => {
                     onChange={handleChange}
                     className={getInputClasses()}
                 />
+                <div className="invalid-feedback">{error}</div>
                 {type === "password" && (
                     <button
                         className="btn btn-outline-secondary"
@@ -46,6 +60,9 @@ TextField.defaultProps = {
     type: "text"
 };
 TextField.propTypes = {
+    step: PropTypes.string,
+    max: PropTypes.string,
+    min: PropTypes.string,
     label: PropTypes.string,
     type: PropTypes.string,
     name: PropTypes.string,

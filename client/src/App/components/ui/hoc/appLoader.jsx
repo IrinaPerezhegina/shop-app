@@ -14,7 +14,7 @@ const AppLoader = ({ children }) => {
 
     const usersStatusLoading = useSelector(getUserLoadingStatus());
     const productsStatusLoading = useSelector(getProductsLoadingStatus());
-    console.log(usersStatusLoading, productsStatusLoading);
+
     useEffect(() => {
         if (!usersStatusLoading && !productsStatusLoading) {
             dispatch(getCurrentUserData());

@@ -40,7 +40,6 @@ export const loadColorsList = () => async (dispatch, getState) => {
         dispatch(colorsRequested());
         try {
             const content = await colorsService.fetchAll();
-            console.log(content);
             dispatch(colorsReceived(content));
         } catch (error) {
             dispatch(colorsRequestFiled(error.message));
@@ -50,20 +49,5 @@ export const loadColorsList = () => async (dispatch, getState) => {
 
 export const getColors = () => (state) => state.colors.entities;
 export const getColorsLoadingStatus = () => (state) => state.colors.isLoading;
-// export const getQualitiesByIds = (qualitiesIds) => (state) => {
-//     if (state.qualities.entities) {
-//         const qualitiesArray = [];
-//         for (const qualId of qualitiesIds) {
-//             for (const quality of state.qualities.entities) {
-//                 if (quality._id === qualId) {
-//                     qualitiesArray.push(quality);
-//                     break;
-//                 }
-//             }
-//         }
 
-//         return qualitiesArray;
-//     }
-//     return [];
-// };
 export default colorsReducer;

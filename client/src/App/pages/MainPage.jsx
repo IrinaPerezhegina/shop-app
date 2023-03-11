@@ -56,7 +56,6 @@ const MainPage = () => {
     ];
     useEffect(() => {
         dispatch(loadProductsList());
-        // setSortProducts(products);
     }, [dispatch]);
 
     useEffect(() => {

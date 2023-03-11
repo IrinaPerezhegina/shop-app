@@ -69,7 +69,6 @@ h2{
             width: 50px;
             height: 50px;
             cursor: pointer;
-            // border: 1px solid $green-color;
             background-color: rgb(189, 246, 189);
             }
         &Checked{
@@ -116,7 +115,15 @@ h2{
             opacity: .9;
         }
     }
-    &_rating>i{
+    &_rating{
+        &Link{
+            display: flex;
+            gap: .3rem;
+            text-decoration: none;
+           
+        }
+      
+        // justify-content: center;
         color: yellow;
         >span{
             font-weight: $weight-600;

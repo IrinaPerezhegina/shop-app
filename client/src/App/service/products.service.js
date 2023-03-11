@@ -10,6 +10,22 @@ const productsService = {
     getProduct: async (productId) => {
         const { data } = await httpService.get(productsEndpoint + productId);
         return data;
+    },
+    update: async (payload, productId) => {
+        const { data } = await httpService.patch(
+            productsEndpoint + productId,
+            payload
+        );
+        return data;
+    },
+    createProduct: async (payload) => {
+        const { data } = await httpService.post(productsEndpoint, payload);
+
+        return data;
+    },
+    removeProduct: async (productId) => {
+        const { data } = await httpService.delete(productsEndpoint + productId);
+        return data;
     }
 };
 

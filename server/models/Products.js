@@ -27,9 +27,6 @@ const reviewSchema = mongoose.Schema(
 
 const schema = new Schema(
   {
-    id: {
-      type: Number,
-    },
     title: {
       type: String,
       required: true,
@@ -48,7 +45,7 @@ const schema = new Schema(
       type: String,
       required: true,
     },
-    reviews: [reviewSchema],
+
     rating: {
       type: Number,
       required: true,
@@ -68,12 +65,10 @@ const schema = new Schema(
     },
     numReviews: {
       type: Number,
-      required: true,
       default: 0,
     },
     countInStock: {
       type: Number,
-      required: true,
       default: 0,
     },
     images: {

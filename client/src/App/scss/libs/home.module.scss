@@ -1,5 +1,5 @@
 @import "./normalize.scss";
-@import "./variable.scss";
+// @import "./variable.scss";
 
 .content{
     background:linear-gradient(185deg, rgba(235,255,228,1) 15%, rgba(182,226,71,1) 16%, rgba(255,255,255,1) 36%);
@@ -26,6 +26,7 @@
             flex-shrink: 1;
         }
         &Search{
+           
             position: relative;
             &Icon{
                 position: absolute;
@@ -36,6 +37,7 @@
             height: 100%;
             width:80%;
             >input{
+                display: inline;
                 font-size:14px;
                 font-weight: $weight-400;
                 height: 45px;

@@ -21,7 +21,7 @@ const PORT = process.env.PORT ?? 8080;
 async function start() {
   try {
     mongoose.connection.once("open", () => {
-      initDatabase();
+      //initDatabase();
     });
 
     await mongoose.connect(process.env.MONGO_URI);

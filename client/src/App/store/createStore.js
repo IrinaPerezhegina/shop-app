@@ -9,12 +9,16 @@ import productsReducer from "./products";
 import userReducer from "./user";
 import colorsReducer from "./colors";
 import imagesReducer from "./images";
+import commentsReducer from "./comments";
+import usersListReducer from "./usersList";
 
 const rootReducer = combineReducers({
     products: productsReducer,
     user: userReducer,
     colors: colorsReducer,
-    images: imagesReducer
+    images: imagesReducer,
+    comments: commentsReducer,
+    usersList: usersListReducer
 });
 
 const initialState = {};

@@ -52,6 +52,7 @@ const usersSlice = createSlice({
             state.auth = null;
             state.dataLoaded = false;
         },
+
         // update: (state, action) => {
         //     const elementIndex = state.entities.findIndex(
         //         (el) => el._id === action.payload._id

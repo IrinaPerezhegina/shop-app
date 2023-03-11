@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styles from "./productCard.module.scss";
-// import { MdStarRate } from "react-icons/md";
 import { useDispatch } from "react-redux";
 // import { addToCart } from "../../../store/cart";
 import { BsCheckLg } from "react-icons/bs";
@@ -23,35 +22,10 @@ const ProductCard = ({ id, title, price, image, rating }) => {
                 </div>
                 <div className={styles.product__description}>
                     <div className={styles.product__descriptionTitle}>
-                        <a href="#"> {title}</a>
+                        <Link to={`/${id}`}> {title}</Link>
                     </div>
                     <div className={styles.product__descriptionEstimation}>
                         <StarRatingStatic rating={rating} />
-                        {/* <div className={styles.starOne}>
-                            <button>
-                                <MdStarRate size="25px" fill="yellow" />
-                            </button>
-                        </div>
-                        <div className={styles.starTwo}>
-                            <button>
-                                <MdStarRate size="25px" fill="yellow" />
-                            </button>
-                        </div>
-                        <div className={styles.starThree}>
-                            <button>
-                                <MdStarRate size="25px" fill="yellow" />
-                            </button>
-                        </div>
-                        <div className={styles.starFour}>
-                            <button>
-                                <MdStarRate size="25px" fill="yellow" />
-                            </button>
-                        </div>
-                        <div className={styles.starFive}>
-                            <button>
-                                <MdStarRate size="25px" fill="yellow" />
-                            </button>
-                        </div> */}
                     </div>
                     <div className={styles.product__descriptionPrice}>
                         $ {price}

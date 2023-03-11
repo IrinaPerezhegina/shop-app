@@ -11,18 +11,6 @@ const Slider = ({ img }) => {
                     <img src={i} />
                 </div>
             ))}
-            {/* <div>
-                <img src="/assets/productCard/id_1/1.jpg" />
-            </div>
-            <div>
-                <img src="/assets/productCard/id_2/1.jpg" />
-            </div>
-            <div>
-                <img src="/assets/productCard/id_3/1.jpg" />
-            </div>
-            <div>
-                <img src="/assets/productCard/id_3/1.jpg" />
-            </div> */}
         </Carousel>
     );
 };

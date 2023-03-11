@@ -1,5 +1,5 @@
 @import "../libs/variable.scss";
-
+@import "../libs/normalize.scss";
 .container {
     background-image: url("../../assets/login/background.jpg");
     background-repeat: no-repeat;
@@ -103,9 +103,10 @@
 }
 
 .formBoxInputButtonBox{
-  
+ 
  justify-self: center;
     > input {
+    
     margin-top: 2rem;
     align-items: center;
     font-weight: $weight-500;
@@ -125,6 +126,7 @@
     &Disabled{
         justify-self: center;
         > input {
+     
         margin-top: 2rem;
         align-items: center;
         font-weight: $weight-500;

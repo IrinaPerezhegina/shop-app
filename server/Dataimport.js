@@ -1,13 +1,16 @@
 const express = require("express");
 const productsMock = require("./mock/products.js");
 const Products = require("./models/Products.js");
-// const usersMock = require("./mock/user.js");
+const usersMock = require("./mock/user.js");
 const User = require("./models/User.js");
 const ImportData = express.Router();
 const colorsMock = require("./mock/color.js");
 const Color = require("./models/Colors.js");
 const imagesMock = require("./mock/images.js");
 const Images = require("./models/Images.js");
+const commentsMock = require("./mock/comments.js");
+const Comment = require("./models/Comment.js");
+
 ImportData.post("/products", async (req, res) => {
   await Products.remove({});
   const importUser = await Products.insertMany(productsMock);
@@ -29,5 +32,11 @@ ImportData.post("/products", async (req, res) => {
 //   const importUser = await Images.insertMany(imagesMock);
 //   res.send({ importUser });
 // });
+
+ImportData.post("/comments", async (req, res) => {
+  await Comment.remove({});
+  const importUser = await Comment.insertMany(commentsMock);
+  res.send({ importUser });
+});
 
 module.exports = ImportData;

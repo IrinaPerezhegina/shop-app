@@ -1,0 +1,61 @@
+@import "../libs/normalize.scss";
+@import "../libs/variable.scss";
+
+
+
+.colorWrapper{
+    display: flex;
+    flex-wrap: wrap;
+   
+     >div>input{
+         display: none;
+     }
+     >div>label{
+         margin-top: .9rem;
+         display: inline-block;
+         border-radius: 50%;
+         margin-left: 1rem;
+         position: relative;
+         display: inline-block;
+         width: 40px;
+         height: 40px;
+         cursor: pointer;
+     }
+     &Checked{
+         border: 5px solid $green-color;
+     }
+ }
+
+ .urlColor{
+   &Wrapper{
+    margin-top: 1rem;
+    padding: 1rem;
+    border: 1px solid black;
+   }
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 1rem;
+    &Btn{
+        padding: .7rem 0.2rem;
+        display: flex;
+        gap: 2rem;
+        justify-content: baseline;
+        >button{
+            width: 100%;
+            padding:.2rem;
+            border-radius: 10px;
+            background-color: $green-background;
+            border: 4px solid $green-active;
+            color: $green-color;
+
+        }
+    }
+ }
+ .formChange{
+    background-color: $green-background;
+ }
+ .colorTitle{
+    margin-left: .4rem;
+    margin-top: 2rem;
+    margin-bottom: 0;
+ }

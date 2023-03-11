@@ -2,7 +2,11 @@
 @import "../libs/variable.scss";
 
 
-input{
+.starInput{
     display: none;
+    
 }
 
+.starError{
+    color: red;
+}

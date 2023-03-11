@@ -2,11 +2,12 @@ import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import AppLoader from "./components/ui/hoc/appLoader.jsx";
 import ProtectedRoute from "./components/ui/protectedRoute";
-
+// http://localhost:8080/api
 // import Header from "./components/ui/Header/header";
 // import Header from "./components/ui/Header/header";
 // import LoginForm from "./components/ui/LoginRegister/loginForm";
 import Login from "./loyauts/login";
+import AdminPage from "./pages/AdminPage.jsx";
 import Cart from "./pages/Cart";
 import CommentsPage from "./pages/CommetnsPage.jsx";
 
@@ -36,8 +37,9 @@ function App() {
                     />
 
                     <Route path="cart" element={<Cart />} />
+                    <Route path="admin" element={<AdminPage />} />
                     <Route path="/" element={<MainPage />} />
-                    <Route path="/:id" element={<ProductPage />}>
+                    <Route path="/:productId" element={<ProductPage />}>
                         <Route path="comments" element={<CommentsPage />} />
                     </Route>
                     <Route path="*" element={<Navigate to="/" />} />

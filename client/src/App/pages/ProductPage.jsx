@@ -5,37 +5,49 @@ import Slider from "../components/ui/slider";
 import styles from "../scss/components/productPage.module.scss";
 import { MdOutlineDoneOutline } from "react-icons/md";
 import { ImArrowLeft2 } from "react-icons/im";
-import { Link, Outlet, useLocation, useParams } from "react-router-dom";
+import {
+    Link,
+    Outlet,
+    useLocation,
+    useNavigate,
+    useParams
+} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getColors, loadColorsList } from "../store/colors";
-import Spinner from "react-bootstrap/esm/Spinner";
 import {
     getProductById,
     getProductsList,
-    getProductsLoadingStatus,
     loadProductsList
 } from "../store/products";
-// import StarRating from "../components/ui/starRating";
 import StarRatingStatic from "../components/ui/starRatingStatic";
+import { getComments, loadCommentsList } from "../store/comments";
+import SpinnerComponent from "../components/ui/spinner";
 
 const ProductPage = () => {
-    const { id } = useParams();
+    const { productId } = useParams();
     const location = useLocation();
     const dispatch = useDispatch();
-    const isLoading = useSelector(getProductsLoadingStatus());
-    console.log(isLoading);
-
-    const product = useSelector(getProductById(id));
+    const comments = useSelector(getComments(productId));
+    const product = useSelector(getProductById(productId));
     const products = useSelector(getProductsList());
-
+    const navigate = useNavigate();
     const colors = useSelector(getColors());
     const [data, setData] = useState({
         color: "",
         images: [],
         size: ""
     });
-    console.log(data);
+
+    function calculatingRatings(data) {
+        data = [];
+        if (data.length === null || 0) {
+            return 0;
+        }
+        return data.reduce((acc, i) => acc + i.estimation, 0) / data.length;
+    }
+
     useEffect(() => {
+        dispatch(loadCommentsList(productId));
         dispatch(loadColorsList());
         dispatch(loadProductsList());
     }, [dispatch]);
@@ -64,8 +76,7 @@ const ProductPage = () => {
             }));
         }
     };
-
-    if (products && colors) {
+    if (products && colors && product) {
         const colorOfObject = colors.filter((col) =>
             product?.color.some((i) => i === col.name)
         );
@@ -75,14 +86,17 @@ const ProductPage = () => {
                 <Header />
                 <section className={styles.product}>
                     <div className={styles.btnBack}>
-                        <Link to={"/"} className={styles.link}>
+                        <button
+                            onClick={() => navigate(-1)}
+                            className={styles.link}
+                        >
                             <ImArrowLeft2
                                 className={styles.linkIcon}
                                 size={"20px"}
                                 fill={"white"}
                             />
                             Back
-                        </Link>
+                        </button>
                     </div>
                     <div className={styles.productWrapper}>
                         <div className={styles.card}>
@@ -91,7 +105,7 @@ const ProductPage = () => {
                                     <Slider img={data.images} />
                                 </div>
                             </div>
-                            {location.pathname === `/${id}/comments` ? (
+                            {location.pathname === `/${productId}/comments` ? (
                                 <Outlet />
                             ) : (
                                 <div className={styles.product_content}>
@@ -102,15 +116,32 @@ const ProductPage = () => {
                                         <span>art.:{product.article}</span>
                                     </div>
                                     <div className={styles.product_rating}>
-                                        <Link to={`/${id}/comments`}>
+                                        <Link
+                                            to={`/${productId}/comments`}
+                                            className={
+                                                styles.product_ratingLink
+                                            }
+                                        >
                                             <StarRatingStatic
-                                                rating={product.rating}
+                                                rating={
+                                                    comments &&
+                                                    calculatingRatings(
+                                                        comments
+                                                    ).toFixed(1)
+                                                }
                                             />
+                                            <span>
+                                                {comments &&
+                                                isNaN(
+                                                    calculatingRatings(comments)
+                                                )
+                                                    ? 0
+                                                    : calculatingRatings(
+                                                          comments
+                                                      ).toFixed(1)}
+                                                ({comments && comments.length})
+                                            </span>
                                         </Link>
-                                        <span>
-                                            {product.rating} (
-                                            {product.reviews.length})
-                                        </span>
                                     </div>
                                     <div className={styles.product_price}>
                                         <p>{product.price} $</p>
@@ -228,7 +259,7 @@ const ProductPage = () => {
             </>
         );
     } else {
-        <Spinner />;
+        return <SpinnerComponent />;
     }
 };
 
