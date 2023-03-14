@@ -5,6 +5,7 @@ import Slider from "../components/ui/slider";
 import styles from "../scss/components/productPage.module.scss";
 import { MdOutlineDoneOutline } from "react-icons/md";
 import { ImArrowLeft2 } from "react-icons/im";
+import { BsCheckLg } from "react-icons/bs";
 import {
     Link,
     Outlet,
@@ -20,13 +21,19 @@ import {
     loadProductsList
 } from "../store/products";
 import StarRatingStatic from "../components/ui/starRatingStatic";
-import { getComments, loadCommentsList } from "../store/comments";
+import {
+    getComments,
+    getCommentsLoadingStatus,
+    loadCommentsList
+} from "../store/comments";
 import SpinnerComponent from "../components/ui/spinner";
+import { addToCart, getCurrentBasket, loadUserCurrent } from "../store/user";
 
 const ProductPage = () => {
     const { productId } = useParams();
     const location = useLocation();
     const dispatch = useDispatch();
+    const isLoading = useSelector(getCommentsLoadingStatus());
     const comments = useSelector(getComments(productId));
     const product = useSelector(getProductById(productId));
     const products = useSelector(getProductsList());
@@ -38,13 +45,26 @@ const ProductPage = () => {
         size: ""
     });
 
+    const cartItems = useSelector(getCurrentBasket() ? getCurrentBasket() : []);
+
+    function isBasket(id, data) {
+        const elem = cartItems.find((elem) => elem._id === id);
+        if (data && elem?.color === data?.color && elem?.size === data.size) {
+            return true;
+        } else return false;
+    }
+
     function calculatingRatings(data) {
-        data = [];
-        if (data.length === null || 0) {
+        if (!isLoading) {
+            return data.reduce((acc, i) => acc + i.estimation, 0) / data.length;
+        } else {
             return 0;
         }
-        return data.reduce((acc, i) => acc + i.estimation, 0) / data.length;
     }
+
+    useEffect(() => {
+        dispatch(loadUserCurrent());
+    }, [dispatch]);
 
     useEffect(() => {
         dispatch(loadCommentsList(productId));
@@ -53,14 +73,26 @@ const ProductPage = () => {
     }, [dispatch]);
 
     useEffect(() => {
-        if (colors && products) {
-            setData({
-                color: product.color[0],
-                images: product.images[0][product.color[0]],
-                size: product.size[0]
-            });
+        if (colors && products && product && cartItems) {
+            if (cartItems.find((elem) => elem._id === productId)) {
+                const elem = cartItems.find((elem) => elem._id === productId);
+
+                setData({
+                    color: elem.color,
+                    images: product?.images.find((img) => img[elem.color])[
+                        elem.color
+                    ],
+                    size: cartItems.find((elem) => elem._id === productId).size
+                });
+            } else {
+                setData({
+                    color: product.color[0],
+                    images: product.images[0][product.color[0]],
+                    size: product.size[0]
+                });
+            }
         }
-    }, [product, colors]);
+    }, [product, colors, cartItems]);
     const handleChange = ({ target }) => {
         if (target.name === "color") {
             const image = product.images.find((i) => i[target.value]);
@@ -76,8 +108,8 @@ const ProductPage = () => {
             }));
         }
     };
-    if (products && colors && product) {
-        const colorOfObject = colors.filter((col) =>
+    if (product && products && colors && cartItems && data) {
+        const colorOfObject = colors?.filter((col) =>
             product?.color.some((i) => i === col.name)
         );
 
@@ -130,6 +162,7 @@ const ProductPage = () => {
                                                     ).toFixed(1)
                                                 }
                                             />
+
                                             <span>
                                                 {comments &&
                                                 isNaN(
@@ -246,9 +279,40 @@ const ProductPage = () => {
                                         </div>
                                     </div>
                                     <div className={styles.product_btn}>
-                                        <button type="button">
-                                            Add to Cart
-                                        </button>
+                                        {cartItems &&
+                                        isBasket(productId, data) ? (
+                                            <div
+                                                className={
+                                                    styles.product__descriptionBtnDisabled
+                                                }
+                                            >
+                                                <button disabled>
+                                                    <BsCheckLg />
+                                                </button>
+                                            </div>
+                                        ) : (
+                                            <div
+                                                className={
+                                                    styles.product__descriptionBtn
+                                                }
+                                            >
+                                                <button
+                                                    onClick={() =>
+                                                        dispatch(
+                                                            addToCart({
+                                                                _id: productId,
+                                                                count: 1,
+                                                                color: data.color,
+                                                                size: data.size,
+                                                                change: true
+                                                            })
+                                                        )
+                                                    }
+                                                >
+                                                    Shpo now
+                                                </button>
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                             )}

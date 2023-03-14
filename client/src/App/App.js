@@ -1,6 +1,7 @@
 import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import AppLoader from "./components/ui/hoc/appLoader.jsx";
+import ProtectedRouteAdmin from "./components/ui/protecredRouteAdmin.jsx";
 import ProtectedRoute from "./components/ui/protectedRoute";
 // http://localhost:8080/api
 // import Header from "./components/ui/Header/header";
@@ -37,7 +38,14 @@ function App() {
                     />
 
                     <Route path="cart" element={<Cart />} />
-                    <Route path="admin" element={<AdminPage />} />
+                    <Route
+                        path="admin"
+                        element={
+                            <ProtectedRouteAdmin>
+                                <AdminPage />
+                            </ProtectedRouteAdmin>
+                        }
+                    />
                     <Route path="/" element={<MainPage />} />
                     <Route path="/:productId" element={<ProductPage />}>
                         <Route path="comments" element={<CommentsPage />} />

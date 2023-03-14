@@ -24,9 +24,9 @@ const FeedBackCard = ({ setModalShow, comments, rating }) => {
                             {isNaN(rating) ? 0 : rating}({comments})
                         </p>
                     </div>
-                    <p className={styles.feedBackAuth}>
+                    <span className={styles.feedBackAuth}>
                         only an authorized user can leave a review
-                    </p>
+                    </span>
                 </Card.Text>
                 <button
                     disabled={!CurrentUserAuth}

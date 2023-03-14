@@ -17,13 +17,14 @@ import {
 import { getProductsList, loadProductsList } from "../store/products";
 import SpinnerComponent from "../components/ui/spinner";
 import { Link } from "react-router-dom";
+import { nanoid } from "@reduxjs/toolkit";
 
 const Cart = () => {
     const dispatch = useDispatch();
     const isLoading = useSelector(getUserLoadingStatus());
     const productsCart = useSelector(getCurrentBasket());
     const products = useSelector(getProductsList());
-    console.log(products);
+
     useEffect(() => {
         dispatch(loadUserCurrent());
         dispatch(loadProductsList());
@@ -67,6 +68,12 @@ const Cart = () => {
                                     <div className={styles.cart_headerTitle}>
                                         product name
                                     </div>
+                                    <div className={styles.cart_headerColor}>
+                                        color
+                                    </div>
+                                    <div className={styles.cart_headerSize}>
+                                        size
+                                    </div>
                                     <div className={styles.cart_headerCount}>
                                         quantity
                                     </div>
@@ -74,139 +81,179 @@ const Cart = () => {
                                         price
                                     </div>
                                 </header>
-                                {productsCart.map(({ _id, count }) => (
-                                    <>
-                                        <section
-                                            key={_id}
-                                            className={styles.product}
-                                        >
-                                            <div className={styles.product_img}>
-                                                <img
-                                                    src={
-                                                        products?.find(
-                                                            (prod) =>
-                                                                prod._id === _id
-                                                        ).image
-                                                    }
-                                                    alt={
-                                                        products.find(
-                                                            (prod) =>
-                                                                prod._id === _id
-                                                        ).title
-                                                    }
-                                                />
-                                            </div>
-
-                                            <div
-                                                className={styles.product_title}
+                                {productsCart.map(
+                                    ({ _id, count, color, size }) => (
+                                        <>
+                                            <section
+                                                key={nanoid()}
+                                                className={styles.product}
                                             >
-                                                <Link>
-                                                    {
-                                                        products.find(
-                                                            (prod) =>
-                                                                prod._id === _id
-                                                        ).title
-                                                    }
-                                                </Link>
-                                            </div>
-
-                                            <div
-                                                className={styles.product_count}
-                                            >
-                                                <div className={styles.count}>
-                                                    <div
-                                                        className={
-                                                            styles.count_box
-                                                        }
-                                                    >
-                                                        <p>{count}</p>
-                                                    </div>
-                                                    <div
-                                                        className={
-                                                            styles.count_controls
-                                                        }
-                                                    >
-                                                        <button
-                                                            type="button"
-                                                            className={
-                                                                styles.count_up
-                                                            }
-                                                            onClick={() =>
-                                                                dispatch(
-                                                                    addToCart({
-                                                                        _id,
-                                                                        count: 1
-                                                                    })
-                                                                )
-                                                            }
-                                                        >
-                                                            <BiUpArrow fill="green" />
-                                                        </button>
-
-                                                        <button
-                                                            disabled={
-                                                                count <= 1
-                                                            }
-                                                            onClick={() =>
-                                                                dispatch(
-                                                                    reduceByOnePosition(
-                                                                        {
-                                                                            _id,
-                                                                            count: -1
-                                                                        }
-                                                                    )
-                                                                )
-                                                            }
-                                                            type="button"
-                                                            className={
-                                                                styles.count_down
-                                                            }
-                                                        >
-                                                            <BiDownArrow fill="green" />
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div
-                                                className={styles.product_price}
-                                            >
-                                                {(
-                                                    products.find(
-                                                        (prod) =>
-                                                            prod._id === _id
-                                                    ).price * count
-                                                ).toFixed(3)}{" "}
-                                                $
-                                            </div>
-
-                                            <div
-                                                className={
-                                                    styles.product_controls
-                                                }
-                                            >
-                                                <button
-                                                    type="button"
-                                                    onClick={() =>
-                                                        dispatch(
-                                                            deleteByOnePosition(
-                                                                {
-                                                                    _id,
-                                                                    count: 0
-                                                                }
-                                                            )
-                                                        )
+                                                <div
+                                                    className={
+                                                        styles.product_img
                                                     }
                                                 >
-                                                    <AiFillDelete
-                                                        fill="green"
-                                                        size="30px"
+                                                    <img
+                                                        src={
+                                                            products?.find(
+                                                                (prod) =>
+                                                                    prod._id ===
+                                                                    _id
+                                                            ).image
+                                                        }
+                                                        alt={
+                                                            products.find(
+                                                                (prod) =>
+                                                                    prod._id ===
+                                                                    _id
+                                                            ).title
+                                                        }
                                                     />
-                                                </button>
-                                            </div>
-                                        </section>
-                                    </>
-                                ))}
+                                                </div>
+
+                                                <div
+                                                    className={
+                                                        styles.product_title
+                                                    }
+                                                >
+                                                    <Link to={`/${_id}`}>
+                                                        {
+                                                            products.find(
+                                                                (prod) =>
+                                                                    prod._id ===
+                                                                    _id
+                                                            ).title
+                                                        }
+                                                    </Link>
+                                                </div>
+                                                <div
+                                                    className={
+                                                        styles.product_color
+                                                    }
+                                                >
+                                                    <p
+                                                        style={{
+                                                            color
+                                                        }}
+                                                    >
+                                                        {color}
+                                                    </p>
+                                                </div>
+                                                <div
+                                                    className={
+                                                        styles.product_size
+                                                    }
+                                                >
+                                                    <p>{size}</p>
+                                                </div>
+                                                <div
+                                                    className={
+                                                        styles.product_count
+                                                    }
+                                                >
+                                                    <div
+                                                        className={styles.count}
+                                                    >
+                                                        <div
+                                                            className={
+                                                                styles.count_box
+                                                            }
+                                                        >
+                                                            <p>{count}</p>
+                                                        </div>
+                                                        <div
+                                                            className={
+                                                                styles.count_controls
+                                                            }
+                                                        >
+                                                            <button
+                                                                type="button"
+                                                                className={
+                                                                    styles.count_up
+                                                                }
+                                                                onClick={() =>
+                                                                    dispatch(
+                                                                        addToCart(
+                                                                            {
+                                                                                color,
+                                                                                size,
+                                                                                _id,
+                                                                                count: 1
+                                                                            }
+                                                                        )
+                                                                    )
+                                                                }
+                                                            >
+                                                                <BiUpArrow fill="green" />
+                                                            </button>
+
+                                                            <button
+                                                                disabled={
+                                                                    count <= 1
+                                                                }
+                                                                onClick={() =>
+                                                                    dispatch(
+                                                                        reduceByOnePosition(
+                                                                            {
+                                                                                _id,
+                                                                                count: -1
+                                                                            }
+                                                                        )
+                                                                    )
+                                                                }
+                                                                type="button"
+                                                                className={
+                                                                    styles.count_down
+                                                                }
+                                                            >
+                                                                <BiDownArrow fill="green" />
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div
+                                                    className={
+                                                        styles.product_price
+                                                    }
+                                                >
+                                                    {(
+                                                        products.find(
+                                                            (prod) =>
+                                                                prod._id === _id
+                                                        ).price * count
+                                                    ).toFixed(3)}{" "}
+                                                    $
+                                                </div>
+
+                                                <div
+                                                    className={
+                                                        styles.product_controls
+                                                    }
+                                                >
+                                                    <button
+                                                        type="button"
+                                                        onClick={() =>
+                                                            dispatch(
+                                                                deleteByOnePosition(
+                                                                    {
+                                                                        _id,
+                                                                        count: 0
+                                                                    }
+                                                                )
+                                                            )
+                                                        }
+                                                    >
+                                                        <AiFillDelete
+                                                            fill="green"
+                                                            size="30px"
+                                                        />
+                                                    </button>
+                                                </div>
+                                            </section>
+                                        </>
+                                    )
+                                )}
                                 <div className={styles.cart_footer}>
                                     <div className={styles.cart_footerCount}>
                                         {getCountsByBasket() + " единиц"}
@@ -217,6 +264,9 @@ const Cart = () => {
                                 </div>
                             </section>
                         </div>
+                    </div>
+                    <div className={styles.cart_order}>
+                        <button>Order</button>
                     </div>
                 </section>
             ) : (

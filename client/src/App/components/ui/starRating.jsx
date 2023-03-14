@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { BsFillStarFill } from "react-icons/bs";
 import style from "../../scss/components/starRating.module.scss";
 import PropTypes from "prop-types";
+import { nanoid } from "@reduxjs/toolkit";
 
 const StarRating = ({ onChange, value, error }) => {
     const [rating, setRating] = useState(null);
@@ -14,7 +15,7 @@ const StarRating = ({ onChange, value, error }) => {
             {[...Array(5)].map((star, i) => {
                 const ratingValue = i + 1;
                 return (
-                    <label key={i}>
+                    <label key={nanoid()}>
                         <input
                             className={style.starInput}
                             onChange={handleChange}

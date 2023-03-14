@@ -53,24 +53,17 @@ const usersSlice = createSlice({
             state.dataLoaded = false;
         },
 
-        // update: (state, action) => {
-        //     const elementIndex = state.entities.findIndex(
-        //         (el) => el._id === action.payload._id
-        //     );
-        //     state.entities[elementIndex] = {
-        //         ...state.entities[elementIndex],
-        //         ...action.payload
-        //     };
-        // },
         authRequested: (state) => {
             state.error = null;
         },
 
         cartAdd: (state, action) => {
             const item = action.payload;
+
             const existItem = state.entities.cartItems.findIndex(
                 (x) => x._id === item._id
             );
+
             if (existItem >= 0) {
                 return {
                     ...state,
@@ -80,8 +73,9 @@ const usersSlice = createSlice({
                             elem._id === item._id
                                 ? {
                                       count: elem.count + 1,
-                                      price: elem.price,
-                                      _id: elem._id
+                                      _id: item._id,
+                                      color: item.color,
+                                      size: item.size
                                   }
                                 : elem
                         )
@@ -107,9 +101,8 @@ const usersSlice = createSlice({
                     cartItems: state.entities.cartItems.map((elem) =>
                         elem._id === item._id
                             ? {
-                                  count: elem.count - 1,
-                                  price: elem.price,
-                                  _id: elem._id
+                                  ...elem,
+                                  count: elem.count - 1
                               }
                             : elem
                     )
@@ -133,6 +126,7 @@ const usersSlice = createSlice({
             state.error = action.payload;
             state.isLoading = false;
         }
+        // changeProduct:
     }
 });
 
@@ -165,7 +159,7 @@ export const deleteByOnePosition = (payload) => async (dispatch, getState) => {
 export const addToCart = (payload) => async (dispatch, getState) => {
     try {
         await userService.update(payload);
-        console.log(payload);
+
         dispatch(cartAdd(payload));
     } catch (error) {
         dispatch(cartRequestFailed(error.message));
@@ -180,16 +174,6 @@ export const reduceByOnePosition = (payload) => async (dispatch, getState) => {
         dispatch(cartRequestFailed(error.message));
     }
 };
-
-// export const updateUserData = (payload) => async (dispatch) => {
-//     dispatch(updateRequested());
-//     try {
-//         const content = await userService.update(payload);
-//         dispatch(update(content));
-//     } catch (error) {
-//         dispatch(updateFailed(error.message));
-//     }
-// };
 
 export const logOut = () => (dispatch) => {
     localStorageService.removeAuthData();
@@ -246,14 +230,21 @@ export const loadUserCurrent = () => async (dispatch) => {
     }
 };
 
+export const getDataIsLoading = () => (state) => state.user.isLoading;
 export const getDataStatus = () => (state) => state.user.dataLoaded;
 export const getIsLoggedIn = () => (state) => state.user.isLoggedIn;
+export const getIsAdminIn = () => (state) => {
+    if (state.user.entities) {
+        return state.user.entities.isAdmin;
+    } else return false;
+};
 export const getCurrentUserId = () => (state) => state.user.auth;
 export const getCurrentBasket = () => (state) => {
     if (state.user.entities) {
         return state.user.entities.cartItems;
     } else return [];
 };
+
 export const getUserLoadingStatus = () => (state) => state.user.isLoading;
 export const getCurrentUserData = () => (state) => state.user.entities;
 export const getAuthErrors = () => (state) => state.user.error;

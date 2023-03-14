@@ -178,6 +178,10 @@ function ModalWindowCreateProduct(props) {
 
         return Object.keys(errors).length === 0;
     };
+    const clearForm = () => {
+        setData({});
+        setErrors({});
+    };
     const isValid = Object.keys(errors).length === 0;
     console.log(isValid);
     const handleSubmit = (e) => {
@@ -222,9 +226,8 @@ function ModalWindowCreateProduct(props) {
             numReviews: Number(0)
         };
         dispatch(createProduct(newData, delete newData.sizes));
-
-        console.log(newData);
-        console.log(errorImages);
+        props.onHide();
+        clearForm();
     };
 
     const handleChangeUrl = (target) => {

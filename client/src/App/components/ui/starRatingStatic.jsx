@@ -2,11 +2,11 @@ import React from "react";
 // import style from "../../scss/components/starRating.module.scss";
 import { BsStar, BsFillStarFill, BsStarHalf } from "react-icons/bs";
 import PropTypes from "prop-types";
+import { nanoid } from "@reduxjs/toolkit";
 
 const StarRatingStatic = ({ rating }) => {
-    console.log(rating);
     const ratingNew = isNaN(rating) ? 0 : rating;
-    console.log(ratingNew);
+
     let fill = ratingNew;
     let half;
     let empty;
@@ -19,22 +19,20 @@ const StarRatingStatic = ({ rating }) => {
 
         fill = 5 - 1 - empty;
     }
-    console.log(fill, half, empty);
+
     return (
         <div>
             {[...Array(Math.floor(fill))].map((i) => (
-                <BsFillStarFill key={i} size={25} fill={"yellow"} />
+                <BsFillStarFill key={nanoid()} size={25} fill={"yellow"} />
             ))}
             {half !== 0
                 ? [...Array(half)].map((i) => (
-                      <BsStarHalf key={i} size={25} fill={"yellow"} />
+                      <BsStarHalf key={nanoid()} size={25} fill={"yellow"} />
                   ))
                 : ""}
             {[...Array(empty)].map((i) => (
-                <BsStar key={i} size={25} fill={"yellow"} />
+                <BsStar key={nanoid()} size={25} fill={"yellow"} />
             ))}
-            {/* <BsStar size={25} /> */}
-            {/* <BsFillStarFill size={25} /> */}
         </div>
     );
 };

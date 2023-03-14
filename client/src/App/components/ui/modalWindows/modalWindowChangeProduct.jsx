@@ -185,6 +185,10 @@ function ModalWindowChangeProduct(props) {
 
         return Object.keys(errors).length === 0;
     };
+    const clearForm = () => {
+        setData({});
+        setErrors({});
+    };
     const isValid = Object.keys(errors).length === 0;
     console.log(isValid);
     const handleSubmit = (e) => {
@@ -221,8 +225,8 @@ function ModalWindowChangeProduct(props) {
             sizes: data.sizes.map((q) => q.value)
         };
         dispatch(updateAllProduct(newData, id));
-        console.log(newData);
-        console.log(errorImages);
+        props.onHide();
+        clearForm();
     };
 
     const handleChangeUrl = (target) => {
