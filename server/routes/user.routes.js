@@ -1,17 +1,31 @@
 const express = require("express");
 const User = require("../models/User");
-// const auth = require("../middleware/auth.middleware");
 const router = express.Router({ mergeParams: true });
 
 router.patch("/:userId", async (req, res) => {
   try {
     const { userId } = req.params;
+    console.log(req.body);
     const updateUser = await User.findOne({ _id: userId });
     const map = updateUser.cartItems.findIndex(
       (item) => item._id.toString() === req.body._id
     );
-
-    if (map >= 0 && req.body.count !== 0) {
+    if (map >= 0 && req.body.change === true && req.body.count !== 0) {
+      const elemInc = `cartItems.${map}`;
+      const updatedUser = await User.findOneAndUpdate(
+        { _id: userId },
+        {
+          $set: {
+            [elemInc]: {
+              _id: req.body._id,
+              count: req.body.count,
+              color: req.body.color,
+              size: req.body.size,
+            },
+          },
+        }
+      );
+    } else if (map >= 0 && req.body.count !== 0) {
       const elemInc = `cartItems.${map}.count`;
       const updatedUser = await User.findByIdAndUpdate(userId, {
         $inc: { [elemInc]: req.body.count },
@@ -24,7 +38,8 @@ router.patch("/:userId", async (req, res) => {
             cartItems: {
               _id: req.body._id,
               count: req.body.count,
-              price: req.body.price,
+              color: req.body.color,
+              size: req.body.size,
             },
           },
           upsert: true,
@@ -41,6 +56,7 @@ router.patch("/:userId", async (req, res) => {
         }
       );
     }
+
     res.send(updateUser);
   } catch (e) {
     res.status(500).json({

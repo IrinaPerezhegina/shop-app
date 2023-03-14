@@ -27,6 +27,8 @@ const schema = new Schema(
           ref: "Product",
           required: true,
         },
+        size: { type: String, required: true, default: 0 },
+        color: { type: String, required: true, default: 0 },
         count: { type: Number, required: true, default: 0 },
       },
     ],
