@@ -249,26 +249,15 @@ function ModalWindowChangeProduct(props) {
     }
     function urlColor(data) {
         const newColor = {};
-        // console.log(data);
-        // console.log(imageUrl);
-        // data.forEach((col, i) =>
-        //     col[col].forEach(
-        //         (url, i) => (newColor[`${col}-${i + 1}`] = [col][i])
-        //     )
-        // );console.log(col[product.color[i]]));
-        // data.map((col, i) => (newColor[col] = lengthArray[i][col]?.length));
-        // data.forEach((col, i) => col[col].forEach((c, i) => console.log(c)));
         data.forEach((col, i) =>
             col[product.color[i]].forEach(
                 (c, k) => (newColor[`${product.color[i]}-${k + 1}`] = c)
             )
         );
-        console.log(newColor);
+
         return newColor;
     }
-    product && urlColor(product.images, imageUrl);
-    product && console.log(product.images);
-    console.log(imageUrl);
+
     return (
         product && (
             <Modal

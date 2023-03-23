@@ -27,7 +27,6 @@ const AdminPage = () => {
         return setId(id);
     }
 
-    console.log(id);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(loadProductsList());

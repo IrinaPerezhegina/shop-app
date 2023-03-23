@@ -125,8 +125,16 @@ const usersSlice = createSlice({
         cartRequestFailed: (state, action) => {
             state.error = action.payload;
             state.isLoading = false;
+        },
+        deleteBasket: (state, action) => {
+            return {
+                ...state,
+                entities: {
+                    ...state.entities,
+                    cartItems: []
+                }
+            };
         }
-        // changeProduct:
     }
 });
 
@@ -141,11 +149,21 @@ const {
     authRequestSuccess,
     authRequestFailed,
     userLoggedOut,
-    cartRequestFailed
+    cartRequestFailed,
+    deleteBasket
 } = actions;
 
 const authRequested = createAction("user/authRequested");
 
+export const emptyBasket = (payload) => async (dispatch) => {
+    try {
+        await userService.update(payload);
+
+        dispatch(deleteBasket());
+    } catch (error) {
+        dispatch(cartRequestFailed(error.message));
+    }
+};
 export const deleteByOnePosition = (payload) => async (dispatch, getState) => {
     try {
         await userService.update(payload);

@@ -5,12 +5,21 @@ const router = express.Router({ mergeParams: true });
 router.patch("/:userId", async (req, res) => {
   try {
     const { userId } = req.params;
-    console.log(req.body);
+
     const updateUser = await User.findOne({ _id: userId });
     const map = updateUser.cartItems.findIndex(
       (item) => item._id.toString() === req.body._id
     );
-    if (map >= 0 && req.body.change === true && req.body.count !== 0) {
+    if (req.body.delete === true) {
+      const updatedUser = await User.findOneAndUpdate(
+        { _id: userId },
+        {
+          $set: {
+            cartItems: [],
+          },
+        }
+      );
+    } else if (map >= 0 && req.body.change === true && req.body.count !== 0) {
       const elemInc = `cartItems.${map}`;
       const updatedUser = await User.findOneAndUpdate(
         { _id: userId },

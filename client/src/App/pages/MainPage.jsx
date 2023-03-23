@@ -27,6 +27,7 @@ const MainPage = () => {
     const [sortSign, setSortSign] = useState("priceASC");
     const [sortProducts, setSortProducts] = useState(products);
     const [searchQuery, setSearchQuery] = useState("");
+
     const pageSize = 6;
 
     const handleChangeSortSign = (e) => {
@@ -46,12 +47,12 @@ const MainPage = () => {
         {
             value: "ratingASC",
             label: "Рейтинг по возрастанию",
-            sort: (products) => _.orderBy(products, ["rating.rate"], ["asc"])
+            sort: (products) => _.orderBy(products, ["rating"], ["asc"])
         },
         {
             value: "ratingDESC",
             label: "Рейтинг по убыванию",
-            sort: (products) => _.orderBy(products, ["rating.rate"], ["desc"])
+            sort: (products) => _.orderBy(products, ["rating"], ["desc"])
         }
     ];
     useEffect(() => {

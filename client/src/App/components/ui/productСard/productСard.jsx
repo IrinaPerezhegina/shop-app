@@ -2,14 +2,16 @@ import React from "react";
 import PropTypes from "prop-types";
 import styles from "./productCard.module.scss";
 import { BsCheckLg } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import StarRatingStatic from "../starRatingStatic";
 import ModalAddToCart from "../modalWindows/modalAddToCart";
 import { useSelector } from "react-redux";
-import { getCurrentBasket } from "../../../store/user";
+import { getCurrentBasket, getIsLoggedIn } from "../../../store/user";
 const ProductCard = ({ id, title, price, image, rating }) => {
     const [modalShow, setModalShow] = React.useState(false);
     const cartItems = useSelector(getCurrentBasket() ? getCurrentBasket() : []);
+    const isLoggedIn = useSelector(getIsLoggedIn());
+    const navigate = useNavigate();
     function isBasket(id) {
         return cartItems.some((item) => item._id === id);
     }
@@ -38,7 +40,13 @@ const ProductCard = ({ id, title, price, image, rating }) => {
                     <div className={styles.product__descriptionPrice}>
                         $ {price}
                     </div>
-                    {isBasket(id) ? (
+                    {!isLoggedIn ? (
+                        <div className={styles.product__descriptionBtn}>
+                            <button onClick={() => navigate("login")}>
+                                Shpo now
+                            </button>
+                        </div>
+                    ) : isBasket(id) ? (
                         <div className={styles.product__descriptionBtnDisabled}>
                             <button disabled>
                                 <BsCheckLg />

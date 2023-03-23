@@ -9,6 +9,7 @@ import {
     getCurrentBasket,
     getCurrentUserData,
     getCurrentUserId,
+    getIsAdminIn,
     loadUserCurrent
 } from "../../../store/user";
 import styles from "../Header/header.module.scss";
@@ -21,7 +22,8 @@ const Header = () => {
     const currentUserData = useSelector(getCurrentUserData());
     const productsCart = useSelector(getCurrentBasket());
     const products = useSelector(getProductsList());
-
+    const isAdmin = useSelector(getIsAdminIn());
+    console.log(isAdmin);
     function getPricesOfBasket() {
         const sum = productsCart.reduce(
             (acc, product) =>
@@ -54,14 +56,19 @@ const Header = () => {
                     <Logo />
                 </div>
                 <div className={styles.headerNavBar}>
-                    <a className={styles.Active} href="/">
+                    <Link className={styles.Active} to="/">
                         Main
-                    </a>
+                    </Link>
                     <a href="/">Product</a>
                     <a href="/">About</a>
                     <a href="/">Review</a>
                 </div>
                 <div className={styles.ButtonWrapper}>
+                    {isAdmin && (
+                        <Link to="/admin" className={styles.cartWrapper}>
+                            <p className={styles.cartPrice}>Change</p>
+                        </Link>
+                    )}
                     {products ? (
                         <Link to="/cart" className={styles.cartWrapper}>
                             <p className={styles.cartPrice}>

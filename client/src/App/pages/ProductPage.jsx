@@ -27,7 +27,12 @@ import {
     loadCommentsList
 } from "../store/comments";
 import SpinnerComponent from "../components/ui/spinner";
-import { addToCart, getCurrentBasket, loadUserCurrent } from "../store/user";
+import {
+    addToCart,
+    getCurrentBasket,
+    getIsLoggedIn,
+    loadUserCurrent
+} from "../store/user";
 
 const ProductPage = () => {
     const { productId } = useParams();
@@ -38,13 +43,14 @@ const ProductPage = () => {
     const product = useSelector(getProductById(productId));
     const products = useSelector(getProductsList());
     const navigate = useNavigate();
+    const isLoggedIn = useSelector(getIsLoggedIn());
     const colors = useSelector(getColors());
     const [data, setData] = useState({
         color: "",
         images: [],
         size: ""
     });
-
+    console.log(isLoggedIn);
     const cartItems = useSelector(getCurrentBasket() ? getCurrentBasket() : []);
 
     function isBasket(id, data) {
@@ -279,8 +285,22 @@ const ProductPage = () => {
                                         </div>
                                     </div>
                                     <div className={styles.product_btn}>
-                                        {cartItems &&
-                                        isBasket(productId, data) ? (
+                                        {!isLoggedIn ? (
+                                            <div
+                                                className={
+                                                    styles.product__descriptionBtn
+                                                }
+                                            >
+                                                <button
+                                                    onClick={() =>
+                                                        navigate("/login")
+                                                    }
+                                                >
+                                                    Shpo now
+                                                </button>
+                                            </div>
+                                        ) : cartItems &&
+                                          isBasket(productId, data) ? (
                                             <div
                                                 className={
                                                     styles.product__descriptionBtnDisabled

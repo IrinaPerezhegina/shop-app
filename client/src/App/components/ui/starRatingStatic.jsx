@@ -16,7 +16,6 @@ const StarRatingStatic = ({ rating }) => {
     } else {
         half = 1;
         empty = 5 - Math.floor(fill) - 1;
-
         fill = 5 - 1 - empty;
     }
 

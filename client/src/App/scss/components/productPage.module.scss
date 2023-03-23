@@ -10,13 +10,13 @@ h2{
     font-size: 1.5rem;
 }
 .product {
-//    background:rgb(244, 242, 242);
+
     line-height: 1.5;
     &Wrapper{
         max-width:  100%;
         margin: 0 auto;
-        display: flex;
-       justify-content: space-between;
+      
+       justify-content:space-between;
         align-items: center;
     }
     &Imgs{
@@ -123,7 +123,7 @@ h2{
            
         }
       
-        // justify-content: center;
+      
         color: yellow;
         >span{
             font-weight: $weight-600;

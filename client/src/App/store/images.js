@@ -50,20 +50,5 @@ export const loadImagesList = () => async (dispatch, getState) => {
 
 export const getImages = () => (state) => state.images.entities;
 export const getImagesLoadingStatus = () => (state) => state.images.isLoading;
-// export const getQualitiesByIds = (qualitiesIds) => (state) => {
-//     if (state.qualities.entities) {
-//         const qualitiesArray = [];
-//         for (const qualId of qualitiesIds) {
-//             for (const quality of state.qualities.entities) {
-//                 if (quality._id === qualId) {
-//                     qualitiesArray.push(quality);
-//                     break;
-//                 }
-//             }
-//         }
 
-//         return qualitiesArray;
-//     }
-//     return [];
-// };
 export default imagesReducer;

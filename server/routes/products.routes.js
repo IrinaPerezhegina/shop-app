@@ -32,7 +32,7 @@ router.get("/:id", async (req, res) => {
 router.patch("/:productId", async (req, res) => {
   try {
     const { productId } = req.params;
-    console.log(productId);
+
     const updateProduct = await Products.findByIdAndUpdate(
       { _id: productId },
       req.body,
@@ -40,16 +40,6 @@ router.patch("/:productId", async (req, res) => {
         new: true,
       }
     );
-    await console.log(updateProduct);
-    // const updateProduct = await Products.findByIdAndUpdate(
-    //   { _id: productId },
-    //   {
-    //     $set: {
-    //       rating: req.body.rating,
-    //       numReviews: req.body.numReviews,
-    //     },
-    //   }
-    // );
 
     res.send(updateProduct);
   } catch (e) {
@@ -62,7 +52,6 @@ router.patch("/:productId", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     const newProduct = await Products.create({ ...req.body });
-    console.log(newProduct);
     res.status(201).send(newProduct);
   } catch (e) {
     res
@@ -75,7 +64,7 @@ router.delete("/:productId", async (req, res) => {
   try {
     const { productId } = req.params;
     const removedProduct = await Products.findById(productId);
-    console.log(removedProduct);
+
     await removedProduct.deleteOne({ _id: productId });
     return res.send(null);
   } catch (e) {
