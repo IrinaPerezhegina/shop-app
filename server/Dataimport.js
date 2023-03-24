@@ -6,8 +6,6 @@ const User = require("./models/User.js");
 const ImportData = express.Router();
 const colorsMock = require("./mock/color.js");
 const Color = require("./models/Colors.js");
-const imagesMock = require("./mock/images.js");
-const Images = require("./models/Images.js");
 const commentsMock = require("./mock/comments.js");
 const Comment = require("./models/Comment.js");
 
